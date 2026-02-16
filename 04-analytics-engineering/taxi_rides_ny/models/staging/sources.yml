@@ -11,11 +11,11 @@ sources:
       {%- if target.type == 'bigquery' -%}
         nytaxi
       {%- else -%}
-        prod
+        main
       {%- endif -%}
     freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 48, period: hour}
+      warn_after: { count: 24, period: hour }
+      error_after: { count: 48, period: hour }
     tables:
       - name: green_tripdata
         description: Raw green taxi trip records
@@ -102,3 +102,22 @@ sources:
             description: Improvement surcharge
           - name: total_amount
             description: Total amount charged
+
+      - name: fhv_tripdata
+        description: Raw FHV trip records
+        loaded_at_field: pickup_datetime
+        columns:
+          - name: dispatching_base_num
+            description: The TLC Base License Number of the base that dispatched the trip
+          - name: pickup_datetime
+            description: The date and time of the trip pickup
+          - name: dropoff_datetime
+            description: The date and time of the trip dropoff
+          - name: pulocationid
+            description: TLC Taxi Zone where the meter was engaged
+          - name: dolocationid
+            description: TLC Taxi Zone where the meter was disengaged
+          - name: sr_flag
+            description: Indicates if the trip was a part of a shared ride chain
+          - name: affiliated_base_number
+            description: The TLC Base License Number of the base that the vehicle is affiliated with
