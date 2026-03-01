@@ -11,8 +11,9 @@ sources:
       {%- if target.type == 'bigquery' -%}
         nytaxi
       {%- else -%}
-        main
+        prod
       {%- endif -%}
+
     tables:
       - name: green_tripdata
         description: Raw green taxi trip records
@@ -95,6 +96,7 @@ sources:
             description: Improvement surcharge
           - name: total_amount
             description: Total amount charged
+
         config:
           loaded_at_field: tpep_pickup_datetime
 
